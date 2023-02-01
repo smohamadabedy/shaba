@@ -1,5 +1,5 @@
 # shaba
-اعتبار سنجی شمار شبا  شماره کارت و تشخیص بانک 
+اعتبار سنجی شماره شبا  شماره کارت و تشخیص بانک 
 
 ```
 contribution: create pull/merge request on branch name shaba{weeknumber}{month}{year}
