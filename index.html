@@ -8,6 +8,7 @@
 <div class="shaba-number">
 <img  width="32px"  src="bank-iran/no-img.png">
 <input type="text"  class="shaba-input"    style="direction:ltr" placeholder="کد شبا را وارد کنید">
+<span>بدون IR</span>
 </div>
 
 <script type="text/javascript">
@@ -259,7 +260,7 @@ $(document).ready(function () {
         e.stopImmediatePropagation();
 
         var cardnumber = e.currentTarget.value;
-
+        e.currentTarget.style.borderColor='green'
         if (validateCard(cardnumber) === false) e.currentTarget.style.borderColor='red';
         var number      = cardnumber.substring(6,-16);
         let bankData    = getBankFromCard(number)
@@ -290,6 +291,7 @@ $(document).ready(function () {
                     input.focus();
                     input.css('border-color','red')
                     } else {
+                    input.css('border-color','green')
                     input.parent().removeClass("has-error");
                 }
             },100);
