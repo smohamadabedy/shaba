@@ -1,6 +1,8 @@
 # shaba
 اعتبار سنجی شماره شبا  شماره کارت و تشخیص بانک 
 
+پیشنمایش: [کلیک کنید](https://shaba.smohammadabedy.ir/) |
+[مشاهده در codepen](https://codepen.io/smohammadabedy/pen/WNKLOWW)
 ```
 contribution: create pull/merge request on branch name shaba{weeknumber}{month}{year}
 ```
