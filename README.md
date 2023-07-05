@@ -16,7 +16,9 @@ contribution: create pull/merge request on branch name shaba{weeknumber}{month}{
 
 1	
 بانک مرکزی جمهوری اسلامی ایران	
-010
+010  
+
+رجکس :  ` /\d{2}(010)\d{19}/g `
 
 2	
 بانک صنعت و معدن	
