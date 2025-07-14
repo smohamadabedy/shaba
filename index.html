@@ -1,306 +1,303 @@
-<meta charset="UTF-8"/>
-<script src="./jquery-3.2.1.min.js" type="text/javascript"></script>
-
-<div class="creditcart">
-    <img  width="32px"  src="bank-iran/no-img.png">
-    <input type="text"  class="creditcart-input" style="direction:ltr" placeholder="شماره کارت را وارد کنید">
-</div>
-
-<div class="shaba-number">
-<img  width="32px"  src="bank-iran/no-img.png">
-<input type="text"  class="shaba-input"    style="direction:ltr" placeholder="کد شبا را وارد کنید">
-<span>بدون IR</span>
-</div>
-
-<script type="text/javascript">
- 
-function iso13616Prepare(iban) {
-    iban = iban;
-    iban = iban.toUpperCase();
-    iban = iban.substr(4) + iban.substr(0, 4);
-
-    var A = 'A'.charCodeAt(0),
-        Z = 'Z'.charCodeAt(0);
-
-    return iban.split('').map(function (n) { var code = n.charCodeAt(0); if (code >= A && code <= Z) {return code - A + 10;} else {return n;}}).join('');
-}
-
-function iso7064Mod97_10(iban) {
-    var remainder = iban,
-        block;
-
-    while (remainder.length > 2) {
-        block = remainder.slice(0, 9);
-        remainder = parseInt(block, 10) % 97 + remainder.slice(block.length);
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SHABA</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+  <style>
+    body {
+      font-family: "Vazir", sans-serif;
+      background-color: #f9f9f9;
     }
-
-    return parseInt(remainder, 10) % 97;
-}
-
-function ConvertNumberP2E(StrWithNumber) {
-    var fn = ["۰", "۱", "۲", "۳", "۴", "۵", "۶", "۷", "۸", "۹"];
-    var fn2 = ["٠", "١", "٢", "٣", "٤", "٥", "٦", "٧", "٨", "٩"];
-    var en = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
-
-    do {
-        StrWithNumber2 = StrWithNumber;
-        for (var i = 0; i < 10; i++) {
-            StrWithNumber = StrWithNumber.replace(fn[i], en[i]);
-            StrWithNumber = StrWithNumber.replace(fn2[i], en[i]);
-        }
-
-        if (StrWithNumber2 === StrWithNumber) {
-            break;
-        }
-    } while (true);
-    return StrWithNumber;
-}
-
-function limit_number() {
-    var input = $(this);
-    setTimeout(function () {
-        input.val(ConvertNumberP2E(input.val()).replace(/[^\d]+/g, ''));
-    });
-}
-
-function getBankFromShaba(code){
-	
-	switch (code){
-		case '010':
-			return ['meli' , 'بانک مرکزی' , '010']
-			break;
-		case '011':
-			return ['sanatmadan' , 'بانک صنعت و معدن' , '011']
-			break;
-	    case '012':
-			return ['mellat' , 'بانک ملت' , '012']
-			break;
-		case '013':
-			return ['refah' , 'بانک رفاه' , '013']
-			break;
-		case '014':
-			return ['maskan' , 'بانک مسکن' , '014']
-			break;
-		case '015':
-			return ['sepah' , 'بانک سپه' , '015']
-			break;
-		case '016':
-			return ['keshavarsi' , 'بانک کشاورزی' , '016']
-			break;
-		case '017':
-			return ['meli' , 'بانک ملی ایران' , '017']
-			break;
-		case '018':
-			return ['tejarat' , 'بانک تجارت' , '018']
-			break;
-		case '019':
-			return ['saderat' , 'بانک صادرات' , '019']
-			break;
-	    case '020':
-			return ['tooseesaderat' , 'بانک توسعه صادرات' , '020']
-			break;
-		case '021':
-			return ['postbank' , 'پست بانک ایران' , '021']
-			break;
-		case '022':
-			return ['toosetaavon' , 'بانک توسعه تعاون' , '022']
-			break;
-		case '051':
-			return ['etebaritosee' , 'موسسه اعتباری توسعه' , '051']
-			break;
-		case '053':
-			return ['karafarin' , 'بانک کارآفرین' , '053']
-			break;
-		case '054':
-			return ['parsian' , 'بانک پارسیان' , '054']
-			break;
-		case '055':
-			return ['eghtesad' , 'بانک اقتصاد نوین' , '055']
-			break;
-		case '056':
-			return ['saman' , 'بانک سامان' , '056']
-			break;
-	    case '057':
-			return ['pasargad' , 'بانک پاسارگاد' , '057']
-			break;
-		case '058':
-			return ['sarmaye' , 'بانک سرمایه' , '058']
-			break;
-		case '059':
-			return ['sina' , 'بانک سینا' , '059']
-			break;
-		case '060':
-			return ['gharzolhasaneh' , 'بانک قرض الحسنه مهر' , '060']
-			break;
-		case '061':
-			return ['shahr' , 'بانک شهر' , '061']
-			break;
-		case '062':
-			return ['tat' , 'بانک تات' , '062']
-			break;
-		case '063':
-			return ['ansar' , 'بانک انصار' , '063']
-			break;
-		case '064':
-			return ['gardeshgari' , 'بانک گردشگری' , '064']
-			break;
-	    case '065':
-			return ['hekmat' , 'بانک حکمت ایرانیان' , '065']
-			break;
-		case '066':
-			return ['day' , 'بانک دی' , '066']
-			break;
-		case '069':
-			return ['iranzamin' , 'بانک ایران زمین' , '069']
-			break;
-        default:
-            return ['no-img' , 'بانک مرکزی' , '000']
+    input {
+      direction: ltr;
+      text-align: center;
+      font-family: monospace;
+    }
+    img.bank-logo {
+      width: 48px;
+      height: 48px;
+      object-fit: contain;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      background-color: white;
+    }
+    pre {
+      background-color: #f1f1f1;
+      padding: 1rem;
+      overflow-x: auto;
+    }
+    section {
+      background: #fff;
+      padding: 2rem;
+      border-radius: 10px;
+      margin-top: 2rem;
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    }
+	table {
+		width: 100%;
+		border-collapse: collapse;
+		margin: 20px 0;
 	}
-       
-}
+	th, td {
+		border: 1px solid #ddd;
+		padding: 8px 12px;
+		text-align: right;
+	}
+	th {
+		background-color: #f8f9fa;
+	}
+	tr:nth-child(even) {
+		background-color: #f9f9f9;
+	}
+	.regex {
+		font-family: monospace;
+		background-color: #f0f0f0;
+		padding: 2px 5px;
+		border-radius: 3px;
+		direction: ltr;
+		display: inline-block;
+	}
+	table tr td:last-child {
+	  direction: ltr;
+	  text-align: left;
+	  font-family: monospace;
+	  unicode-bidi: isolate; /* Ensures proper rendering */
+	}
+  </style>
+</head>
+<body class="container py-5">
 
-function getBankFromCard(code){
+  <h1 class="text-center mb-5">🟢 SHABA</h1>
+  <p class="text-center">توجه: تلفظ صحیح شماره شبا به صورت (SHEBA) میباشد.</p>
+  <hr/>
+  <div class="row g-4 mt-4 mb-4">
+  <h2>پیشنمایش</h2>
+    <!-- Card Input -->
+    <div class="col-md-6">
+      <label for="cardInput" class="form-label">شماره کارت بانکی</label>
+      <input id="cardInput" type="text" class="form-control" placeholder="مثال: ۶۰۳۷۹۹۱۲۳۴۵۶۷۸۹۰">
+    </div>
+    <div class="col-md-1 d-flex align-items-end">
+      <img id="cardBankLogo" src="./bank-iran/no-img.png" class="bank-logo" alt="Bank Logo">
+    </div>
+
+    <!-- Shaba Input -->
+    <div class="col-md-6">
+      <label for="shabaInput" class="form-label">شماره شبا (IBAN)</label>
+      <input id="shabaInput" type="text" class="form-control" placeholder="مثال: 620190000000100324200001">
+    </div>
+    <div class="col-md-1 d-flex align-items-end">
+      <img id="shabaBankLogo" src="./bank-iran/no-img.png" class="bank-logo" alt="Bank Logo">
+    </div>
+  </div>
+  <hr/>
+  <!-- Documentation -->
+  <section class="mt-4">
+    <h2>راهنمای استفاده از شبا</h2>
+    <p>
+		اعتبار سنجی و تشخیص (به همراه تصویر) شماره کارت و شماره شبا بانک
+    </p>
+	<br/><br/>
+    <h3>📦 نصب</h3>
+    <p><strong>CDN:</strong></p>
+    <pre dir="ltr"><code>&lt;script src="https://cdn.jsdelivr.net/gh/smohamadabedy/shaba@master/dist/shaba.min.js"&gt;&lt;/script&gt;</code></pre>
+
+    <p><strong>NPM:</strong></p>
+    <pre dir="ltr"><code>npm install shaba</code></pre>
+	<br/><br/>
+    <h3>🧪 مثال استفاده</h3>
+    <pre dir="ltr"><code>
+const card = shaba.convertPersianToEnglishDigits('۶۰۳۷۹۹...');
+const isValid = shaba.validateCard(card);
+const prefix = card.slice(0, 6);
+const bank = shaba.getBankFromCard(prefix);
+console.log(bank); // ["meli", "603799", "بانک ملی"]
+    </code></pre>
+	<br/><br/>
+    <h3>🧠 توابع در دسترس</h3>
+    <ul>
+      <li><code>convertPersianToEnglishDigits(str)</code> — تبدیل ارقام فارسی/عربی به انگلیسی</li>
+      <li><code>validateCard(cardNumber)</code> — بررسی اعتبار شماره کارت</li>
+      <li><code>getBankFromCard(prefix)</code> — دریافت اطلاعات بانک از روی شماره کارت</li>
+      <li><code>getBankFromShaba(code)</code> — دریافت بانک از کد شبا</li>
+    </ul>
+	<br/><br/>
+    <h3>🖼 استفاده از لوگوهای بانکی</h3>
+    <pre dir="ltr"><code>&lt;img src="https://cdn.jsdelivr.net/gh/smohamadabedy/shaba@master/bank-iran/meli.png"&gt;</code></pre>
+	<br/><br/>
+	<h3>🧪 نمونه کد</h3>
+<pre dir="ltr"><code dir="ltr">&lt;script src=&quot;dist/shaba.min.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+  // DOM Elements
+  const $card = document.getElementById(&#39;cardInput&#39;); // Card number input field
+  const $shaba = document.getElementById(&#39;shabaInput&#39;); // Shaba number input field
+
+  // Card Number Validation Logic
+  $card.addEventListener(&#39;input&#39;, function () {
+    // 1. Convert Persian digits to English (for compatibility)
+    const card = shaba.convertPersianToEnglishDigits(this.value);
     
-    switch(code){
-        case '603799':
-            return ["meli","603799","بانک ملی"]
-            break;
-        case '589210':
-            return ["sepah","589210","بانک سپه"]
-            break;
-        case '627961':
-            return ["sanatmadan","627961","بانک صنعت و معدن"]
-            break;
-        case '603770':
-            return ["keshavarsi","603770","بانک کشاورزی"]
-            break;
-        case '628023':
-            return ["maskan","628023","بانک مسکن"]
-            break;
-        case '627760':
-            return ["postbank","627760","پست بانک"]
-            break;
-        case '502908':
-            return ["tosehe","502908","بانک توسعه"]
-            break;
-        case '627412':
-            return ["eghtesad","627412","بانک اقتصاد"]
-            break;
-        case '622106':
-            return ["parsian","622106","بانک پارسیان"]
-            break;
-        case '502229':
-            return ["pasargad","502229","بانک پاسارگاد"]
-            break;
-        case '627488':
-            return ["karafarin","627488","بانک کارآفرین"]
-            break;
-        case '621986':
-            return ["saman","621986","بانک سامان"]
-            break;
-        case '639346':
-            return ["sina","639346","بانک سینا"]
-            break;
-        case '639607':
-            return ["sarmaye","639607","بانک سرمایه"]
-            break;
-        case '502806':
-            return ["shahr","502806","بانک شهر"]
-            break;
-        case '502938':
-            return ["day","502938","بانک دی"]
-            break;
-        case '603769':
-            return ["saderat","603769","بانک صادرات"]
-            break;
-        case '610433':
-            return ["mellat","610433","بانک ملت"]
-            break;
-        case '627353':
-            return ["tejarat","627353","بانک تجارت"]
-            break;
-        case '589463':
-            return ["refah","589463","بانک رفاه"]
-            break;
-        case '627381':
-            return ["ansar","627381","بانک انصار"]
-            break;
-        case '639370':
-            return ["mehreqtesad","639370","بانک مهراقتصاد"]
-            break;
-        case '639599':
-            return ["ghavamin","639599","بانک قوامین"]
-            break;
-        case '504172':
-            return ["resalat","504172","بانک رسالت"]
-            break;
-        default:
-            return ["no-img",null,"نامشخص"]
-    }
+    // 2. Validate card number format
+    const isValid = shaba.validateCard(card);
     
-}
+    // 3. Extract first 6 digits (bank identifier)
+    const prefix = card.slice(0, 6);
+    
+    // 4. Get bank information from prefix
+    const bank = shaba.getBankFromCard(prefix);
+    
+    // 5. Update bank logo display
+    document.getElementById(&#39;cardBankLogo&#39;).src = &quot;./bank-iran/&quot; + bank[0] + &quot;.png&quot;;
+    
+    // 6. Visual feedback (green=valid, red=invalid)
+    this.style.borderColor = isValid ? &#39;green&#39; : &#39;red&#39;;
+  });
 
-function validateCard(code) {
-    var L = code.length;
-    if (L < 16 || parseInt(code.substr(1, 10), 10) == 0 || parseInt(code.substr(10, 6), 10) == 0) return false;
-    var c = parseInt(code.substr(15, 1), 10);
-    var s = 0;
-    var k, d;
-    for (var i = 0; i < 16; i++) {
-        k = (i % 2 == 0) ? 2 : 1;
-        d = parseInt(code.substr(i, 1), 10) * k;
-        s += (d > 9) ? d - 9 : d;
-    }
-    return ((s % 10) == 0);
-}   
+  // Shaba Number (IBAN) Validation Logic
+  $shaba.addEventListener(&#39;input&#39;, function () {
+    // 1. Standardize input: uppercase, remove hyphens, convert Persian digits
+    const input = shaba.convertPersianToEnglishDigits(
+      this.value.toUpperCase().replace(/-/g, &#39;&#39;)
+    );
+    
+    // 2. Extract bank code (positions 3-5 in Iranian IBAN format)
+    const code = input.slice(2, 5);
+    
+    // 3. Get bank information from code
+    const bank = shaba.getBankFromShaba(code);
+    
+    // 4. Update bank logo display
+    document.getElementById(&#39;shabaBankLogo&#39;).src = &quot;./bank-iran/&quot; + bank[0] + &quot;.png&quot;;
 
-$(document).ready(function () {
+    // 5. IBAN Validation Steps:
+    //    a) Prepare string according to ISO13616 standard
+    const prepared = shaba.iso13616Prepare(input);
+    //    b) Verify using MOD97-10 algorithm
+    const valid = shaba.iso7064Mod97_10(prepared) === 1;
+    
+    // 6. Visual feedback
+    this.style.borderColor = valid ? &#39;green&#39; : &#39;red&#39;;
+  });
+&lt;/script&gt;</pre>
 
-    $('.creditcart-input').on('input',function(e){
-        e.stopPropagation();
-        e.stopImmediatePropagation();
+    </code></pre>
+	
+	
+	
+	<hr/>
+	
+	<h2>دستورالعمل تشخیص بانک از طریق شماره شبا</h2>
 
-        var cardnumber = e.currentTarget.value;
-        e.currentTarget.style.borderColor='green'
-        if (validateCard(cardnumber) === false) e.currentTarget.style.borderColor='red';
-        var number      = cardnumber.substring(6,-16);
-        let bankData    = getBankFromCard(number)
-        document.querySelector('.creditcart>img').src = "./bank-iran/"+bankData[0]+".png";
+<table>
+    <thead>
+        <tr>
+            <th>ردیف</th>
+            <th>نام بانک</th>
+            <th>شناسه بانک</th>
+            <th>الگوی رجکس</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr><td>1</td><td>بانک مرکزی جمهوری اسلامی ایران</td><td>010</td><td><span class="regex">/\d{2}(010)\d+/g</span></td></tr>
+        <tr><td>2</td><td>بانک صنعت و معدن</td><td>011</td><td><span class="regex">/\d{2}(011)\d+/g</span></td></tr>
+        <tr><td>3</td><td>بانک ملت</td><td>012</td><td><span class="regex">/\d{2}(012)\d+/g</span></td></tr>
+        <tr><td>4</td><td>بانک رفاه</td><td>013</td><td><span class="regex">/\d{2}(013)\d+/g</span></td></tr>
+        <tr><td>5</td><td>بانک مسکن</td><td>014</td><td><span class="regex">/\d{2}(014)\d+/g</span></td></tr>
+        <tr><td>6</td><td>بانک سپه</td><td>015</td><td><span class="regex">/\d{2}(015)\d+/g</span></td></tr>
+        <tr><td>7</td><td>بانک کشاورزی</td><td>016</td><td><span class="regex">/\d{2}(016)\d+/g</span></td></tr>
+        <tr><td>8</td><td>بانک ملی ایران</td><td>017</td><td><span class="regex">/\d{2}(017)\d+/g</span></td></tr>
+        <tr><td>9</td><td>بانک تجارت</td><td>018</td><td><span class="regex">/\d{2}(018)\d+/g</span></td></tr>
+        <tr><td>10</td><td>بانک صادرات ایران</td><td>019</td><td><span class="regex">/\d{2}(019)\d+/g</span></td></tr>
+        <tr><td>11</td><td>بانک توسعه صادرات</td><td>020</td><td><span class="regex">/\d{2}(020)\d+/g</span></td></tr>
+        <tr><td>12</td><td>پست بانک ایران</td><td>021</td><td><span class="regex">/\d{2}(021)\d+/g</span></td></tr>
+        <tr><td>13</td><td>بانک توسعه تعاون</td><td>022</td><td><span class="regex">/\d{2}(022)\d+/g</span></td></tr>
+        <tr><td>14</td><td>موسسه اعتباری توسعه</td><td>051</td><td><span class="regex">/\d{2}(051)\d+/g</span></td></tr>
+        <tr><td>15</td><td>بانک کارآفرین</td><td>053</td><td><span class="regex">/\d{2}(053)\d+/g</span></td></tr>
+        <tr><td>16</td><td>بانک پارسیان</td><td>054</td><td><span class="regex">/\d{2}(054)\d+/g</span></td></tr>
+        <tr><td>17</td><td>بانک اقتصاد نوین</td><td>055</td><td><span class="regex">/\d{2}(055)\d+/g</span></td></tr>
+        <tr><td>18</td><td>بانک سامان</td><td>056</td><td><span class="regex">/\d{2}(056)\d+/g</span></td></tr>
+        <tr><td>19</td><td>بانک پاسارگاد</td><td>057</td><td><span class="regex">/\d{2}(057)\d+/g</span></td></tr>
+        <tr><td>20</td><td>بانک سرمایه</td><td>058</td><td><span class="regex">/\d{2}(058)\d+/g</span></td></tr>
+        <tr><td>21</td><td>بانک سینا</td><td>059</td><td><span class="regex">/\d{2}(059)\d+/g</span></td></tr>
+        <tr><td>22</td><td>قرض الحسنه مهر</td><td>060</td><td><span class="regex">/\d{2}(060)\d+/g</span></td></tr>
+        <tr><td>23</td><td>بانک شهر</td><td>061</td><td><span class="regex">/\d{2}(061)\d+/g</span></td></tr>
+        <tr><td>24</td><td>بانک تات</td><td>062</td><td><span class="regex">/\d{2}(062)\d+/g</span></td></tr>
+        <tr><td>25</td><td>بانک انصار</td><td>063</td><td><span class="regex">/\d{2}(063)\d+/g</span></td></tr>
+        <tr><td>26</td><td>بانک گردشگری</td><td>064</td><td><span class="regex">/\d{2}(064)\d+/g</span></td></tr>
+        <tr><td>27</td><td>بانک حکمت ایرانیان</td><td>065</td><td><span class="regex">/\d{2}(065)\d+/g</span></td></tr>
+        <tr><td>28</td><td>بانک دی</td><td>066</td><td><span class="regex">/\d{2}(066)\d+/g</span></td></tr>
+        <tr><td>29</td><td>بانک ایران زمین</td><td>069</td><td><span class="regex">/\d{2}(069)\d+/g</span></td></tr>
+    </tbody>
+</table>
+<hr/>
+<h2>دستورالعمل تشخیص بانک از شماره کارت</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>نام بانک</th>
+            <th>پیش شماره</th>
+            <th>الگوی رجکس</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr><td>بانک ملی</td><td>۶۰۳۷۹۹</td><td><span class="regex">/(603799)\d+/g</span></td></tr>
+        <tr><td>بانک سامان</td><td>۶۲۱۹۸۶</td><td><span class="regex">/(621986)\d+/g</span></td></tr>
+        <tr><td>بانک سپه</td><td>۵۸۹۲۱۰</td><td><span class="regex">/(589210)\d+/g</span></td></tr>
+        <tr><td>بانک سینا</td><td>۶۳۹۳۴۶</td><td><span class="regex">/(639346)\d+/g</span></td></tr>
+        <tr><td>بانک توسعه صادرات</td><td>۶۲۷۶۴۸</td><td><span class="regex">/(627648)\d+/g</span></td></tr>
+        <tr><td>بانک سرمایه</td><td>۶۳۹۶۰۷</td><td><span class="regex">/(639607)\d+/g</span></td></tr>
+        <tr><td>بانک صنعت و معدن</td><td>۶۲۷۹۶۱</td><td><span class="regex">/(627961)\d+/g</span></td></tr>
+        <tr><td>بانک شهر</td><td>۵۰۴۷۰۶</td><td><span class="regex">/(504706)\d+/g</span></td></tr>
+        <tr><td>بانک کشاورزی</td><td>۶۰۳۷۷۰</td><td><span class="regex">/(603770)\d+/g</span></td></tr>
+        <tr><td>بانک دی</td><td>۵۰۲۹۳۸</td><td><span class="regex">/(502938)\d+/g</span></td></tr>
+        <tr><td>بانک مسکن</td><td>۶۲۸۰۲۳</td><td><span class="regex">/(628023)\d+/g</span></td></tr>
+        <tr><td>بانک صادرات</td><td>۶۰۳۷۶۹</td><td><span class="regex">/(603769)\d+/g</span></td></tr>
+        <tr><td>پست بانک</td><td>۶۲۷۷۶۰</td><td><span class="regex">/(627760)\d+/g</span></td></tr>
+        <tr><td>بانک ملت</td><td>۶۱۰۴۳۳</td><td><span class="regex">/(610433)\d+/g</span></td></tr>
+        <tr><td>بانک توسعه تعاون</td><td>۵۰۲۹۰۸</td><td><span class="regex">/(502908)\d+/g</span></td></tr>
+        <tr><td>بانک تجارت</td><td>۶۲۷۳۵۳</td><td><span class="regex">/(627383)\d+/g</span></td></tr>
+        <tr><td>بانک اقتصاد نوین</td><td>۶۲۷۴۱۲</td><td><span class="regex">/(627412)\d+/g</span></td></tr>
+        <tr><td>بانک رفاه</td><td>۵۸۹۴۶۳</td><td><span class="regex">/(589463)\d+/g</span></td></tr>
+        <tr><td>بانک پارسیان</td><td>۶۲۲۱۰۶</td><td><span class="regex">/(622106)\d+/g</span></td></tr>
+        <tr><td>موسسه نور</td><td>۵۰۷۶۷۷</td><td><span class="regex">/(507677)\d+/g</span></td></tr>
+        <tr><td>بانک پاسارگاد</td><td>۵۰۲۲۲۹</td><td><span class="regex">/(502229)\d+/g</span></td></tr>
+        <tr><td>موسسه ملل</td><td>۶۰۶۲۵۶</td><td><span class="regex">/(606256)\d+/g</span></td></tr>
+        <tr><td>بانک قوامین</td><td>۶۳۹۵۹۹</td><td><span class="regex">/(639599)\d+/g</span></td></tr>
+        <tr><td>بانک قرض الحسنه مهر ایرانیان</td><td>۶۰۶۳۷۳</td><td><span class="regex">/(606373)\d+/g</span></td></tr>
+        <tr><td>بانک کارآفرین</td><td>۶۲۷۴۸۸</td><td><span class="regex">/(627488)\d+/g</span></td></tr>
+        <tr><td>بانک گردشگری</td><td>۵۰۵۴۱۶</td><td><span class="regex">/(505416)\d+/g</span></td></tr>
+    </tbody>
+</table>
+  </section>
+
+  <!-- Script -->
+  <script src="src/shaba.js"></script>
+  <script>
+    const $card = document.getElementById('cardInput');
+    const $shaba = document.getElementById('shabaInput');
+
+    $card.addEventListener('input', function () {
+      const card = shaba.convertPersianToEnglishDigits(this.value);
+      const isValid = shaba.validateCard(card);
+      const prefix = card.slice(0, 6);
+      const bank = shaba.getBankFromCard(prefix);
+      document.getElementById('cardBankLogo').src = "./bank-iran/" + bank[0] + ".png";
+      this.style.borderColor = isValid ? 'green' : 'red';
     });
 
+    $shaba.addEventListener('input', function () {
+      const input = shaba.convertPersianToEnglishDigits(this.value.toUpperCase().replace(/-/g, ''));
+      const code = input.slice(2, 5);
+      const bank = shaba.getBankFromShaba(code);
+      document.getElementById('shabaBankLogo').src = "./bank-iran/" + bank[0] + ".png";
 
-    $(".shaba-input")
-        .on('paste', limit_number)
-        .on('blur', limit_number)
-        .on('keypress', limit_number)
-        .on('input', function () {
-            var input = $(this);
-            setTimeout(function(){
-                let shaba = ConvertNumberP2E(input.val().replace(/\-/g, "")).toUpperCase();
-                if (shaba.length >= 6) {
-                    let shabaCode = shaba.substr(2, 3);
-					let shabbankd = getBankFromShaba(shabaCode)
-					document.querySelector('.shaba-number>img').src = "./bank-iran/"+shabbankd[0]+".png"
-                }
-                if (shaba.length === 0) {
-                    input.parent().removeClass("has-error");
-                    input.parent().removeClass("has-error");
-                    return;
-                }
-                if (shaba.length !== 24 || iso7064Mod97_10(iso13616Prepare("IR" + shaba)) !== 1) {
-                    input.parent().addClass("has-error");
-                    input.focus();
-                    input.css('border-color','red')
-                    } else {
-                    input.css('border-color','green')
-                    input.parent().removeClass("has-error");
-                }
-            },100);
-        });
-});
-</script>
-
-
-
-
-
+      const prepared = shaba.iso13616Prepare(input);
+      const valid = shaba.iso7064Mod97_10(prepared) === 1;
+      this.style.borderColor = valid ? 'green' : 'red';
+    });
+  </script>
+</body>
+</html>

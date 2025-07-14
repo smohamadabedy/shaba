@@ -1,0 +1,34 @@
+{
+  "name": "shaba",
+  "version": "1.0.0",
+  "description": "JavaScript utilities to validate Iranian bank cards and IBAN (Sheba) codes, convert Persian numerals, and detect bank info.",
+  "main": "dist/shaba.min.js",
+  "unpkg": "dist/shaba.min.js",
+  "jsdelivr": "dist/shaba.min.js",
+  "scripts": {
+    "build": "uglifyjs src/shaba.js -o dist/shaba.min.js --compress --mangle"
+  },
+  "keywords": [
+    "iran",
+    "bank",
+    "iban",
+    "shaba",
+    "card",
+    "card-validator",
+    "persian",
+    "iranian-bank",
+    "bank-utils",
+    "javascript",
+    "iban-validator"
+  ],
+  "author": "SMH ABEDY",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/smohamadabedy/shaba"
+  },
+  "bugs": {
+    "url": "https://github.com/smohamadabedy/shaba/issues"
+  },
+  "homepage": "https://github.com/smohamadabedy/shaba#readme"
+}
