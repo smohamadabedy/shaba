@@ -1,6 +1,6 @@
 {
   "name": "shaba",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "JavaScript utilities to validate Iranian bank cards and IBAN (Sheba) codes, convert Persian numerals, and detect bank info.",
   "main": "dist/shaba.min.js",
   "unpkg": "dist/shaba.min.js",
