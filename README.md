@@ -3,7 +3,7 @@
 
 اعتبار سنجی شماره شبا، شماره کارت و تشخیص بانک (به همراه تصویر) 
 
-پیشنمایش: [کلیک کنید](https://smohamadabedy.github.io/shaba/) |
+پیشنمایش: [کلیک کنید](https://smohamadabedy.github.io/shaba/) - [جایگذین](https://shaba.smohammadabedy.ir/) |
 [نسخه به همراه jquery در codepen](https://codepen.io/smohammadabedy/pen/WNKLOWW)
 ```
 contribution: create pull/merge request on branch name shaba{weeknumber}{month}{year}
