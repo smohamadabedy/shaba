@@ -38,59 +38,64 @@ console.log(bank); // ["meli", "603799", "بانک ملی"]
     <pre dir="ltr"><code>&lt;img src="https://cdn.jsdelivr.net/gh/smohamadabedy/shaba@master/bank-iran/meli.png"&gt;</code></pre>
 	<br/><br/>
 	<h3>🧪 نمونه کد</h3>
-<pre dir="ltr"><code dir="ltr">&lt;script src=&quot;dist/shaba.min.js&quot;&gt;&lt;/script&gt;
-&lt;script&gt;
-  // DOM Elements
-  const $card = document.getElementById(&#39;cardInput&#39;); // Card number input field
-  const $shaba = document.getElementById(&#39;shabaInput&#39;); // Shaba number input field
+<pre dir="ltr">
+<code dir="ltr">
+			
+	<!-- نمایش لوگوی بانک کارت -->
+	<img width="32px" id="cardBankLogo" src="https://cdn.jsdelivr.net/gh/smohamadabedy/shaba@master/bank-iran/no-img.png">
+	
+	<!-- ورودی شماره کارت (با جهت چپ به راست برای اعداد) -->
+	<input type="text" id="cardInput" class="creditcart-input" style="direction:ltr" placeholder="شماره کارت را وارد کنید">
+	
+	<!-- نمایش لوگوی بانک شبا -->
+	<img width="32px" id="shabaBankLogo" src="https://cdn.jsdelivr.net/gh/smohamadabedy/shaba@master/bank-iran/no-img.png">
+	
+	<!-- ورودی شماره شبا -->
+	<input type="text" id="shabaInput" class="shaba-input" style="direction:ltr" placeholder="کد شبا را وارد کنید">
+<!-- بارگذاری فایل جاوااسکریپت از CDN (jsDelivr) -->
+	<script src="https://cdn.jsdelivr.net/gh/smohamadabedy/shaba@master/dist/shaba.min.js"></script>
+	
+	<script type="text/javascript">
+	  // گرفتن المان‌های ورودی از صفحه
+	  const $card = document.getElementById('cardInput');
+	  const $shaba = document.getElementById('shabaInput');
+	
+	  // وقتی شماره کارت تغییر می‌کند:
+	  $card.addEventListener('input', function () {
+	    const card = shaba.convertPersianToEnglishDigits(this.value); // تبدیل ارقام فارسی به انگلیسی
+	    const isValid = shaba.validateCard(card);                     // بررسی اعتبار کارت بانکی با الگوریتم Luhn
+	    const prefix = card.slice(0, 6);                              // گرفتن ۶ رقم اول کارت
+	    const bank = shaba.getBankFromCard(prefix);                  // گرفتن اطلاعات بانک از روی شماره کارت
+	
+	    // تغییر تصویر لوگوی بانک
+	    document.getElementById('cardBankLogo').src =
+	      "https://cdn.jsdelivr.net/gh/smohamadabedy/shaba@master/bank-iran/" + bank[0] + ".png";
+	
+	    // رنگ حاشیه را سبز یا قرمز نمایش بده بر اساس اعتبار کارت
+	    this.style.borderColor = isValid ? 'green' : 'red';
+	  });
+	
+	  // وقتی شبا تغییر می‌کند:
+	  $shaba.addEventListener('input', function () {
+	    // پاکسازی شبا از - و تبدیل اعداد فارسی/عربی به انگلیسی
+	    const input = shaba.convertPersianToEnglishDigits(this.value.toUpperCase().replace(/-/g, ''));
+	
+	    const code = input.slice(2, 5);                               // استخراج کد بانک از شبا
+	    const bank = shaba.getBankFromShaba(code);                   // گرفتن اطلاعات بانک از شبا
+	
+	    // تغییر تصویر لوگوی بانک
+	    document.getElementById('shabaBankLogo').src =
+	      "https://cdn.jsdelivr.net/gh/smohamadabedy/shaba@master/bank-iran/" + bank[0] + ".png";
+	
+	    // آماده‌سازی و اعتبارسنجی با استاندارد ISO 7064 (Mod97)
+	    const prepared = shaba.iso13616Prepare(input);
+	    const valid = shaba.iso7064Mod97_10(prepared) === 1;
+	
+	    // رنگ حاشیه ورودی را مشخص کن
+	    this.style.borderColor = valid ? 'green' : 'red';
+	  });
+	</script>
 
-  // Card Number Validation Logic
-  $card.addEventListener(&#39;input&#39;, function () {
-    // 1. Convert Persian digits to English (for compatibility)
-    const card = shaba.convertPersianToEnglishDigits(this.value);
-    
-    // 2. Validate card number format
-    const isValid = shaba.validateCard(card);
-    
-    // 3. Extract first 6 digits (bank identifier)
-    const prefix = card.slice(0, 6);
-    
-    // 4. Get bank information from prefix
-    const bank = shaba.getBankFromCard(prefix);
-    
-    // 5. Update bank logo display
-    document.getElementById(&#39;cardBankLogo&#39;).src = &quot;./bank-iran/&quot; + bank[0] + &quot;.png&quot;;
-    
-    // 6. Visual feedback (green=valid, red=invalid)
-    this.style.borderColor = isValid ? &#39;green&#39; : &#39;red&#39;;
-  });
-
-  // Shaba Number (IBAN) Validation Logic
-  $shaba.addEventListener(&#39;input&#39;, function () {
-    // 1. Standardize input: uppercase, remove hyphens, convert Persian digits
-    const input = shaba.convertPersianToEnglishDigits(
-      this.value.toUpperCase().replace(/-/g, &#39;&#39;)
-    );
-    
-    // 2. Extract bank code (positions 3-5 in Iranian IBAN format)
-    const code = input.slice(2, 5);
-    
-    // 3. Get bank information from code
-    const bank = shaba.getBankFromShaba(code);
-    
-    // 4. Update bank logo display
-    document.getElementById(&#39;shabaBankLogo&#39;).src = &quot;./bank-iran/&quot; + bank[0] + &quot;.png&quot;;
-
-    // 5. IBAN Validation Steps:
-    //    a) Prepare string according to ISO13616 standard
-    const prepared = shaba.iso13616Prepare(input);
-    //    b) Verify using MOD97-10 algorithm
-    const valid = shaba.iso7064Mod97_10(prepared) === 1;
-    
-    // 6. Visual feedback
-    this.style.borderColor = valid ? &#39;green&#39; : &#39;red&#39;;
-  });
-&lt;/script&gt;
 </code></pre>
 <hr/>
 	<h2>دستورالعمل تشخیص بانک از طریق شماره شبا</h2>
