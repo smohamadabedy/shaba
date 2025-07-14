@@ -25,7 +25,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/smohamadabedy/shaba"
+    "url": "git+https://github.com/smohamadabedy/shaba.git"
   },
   "bugs": {
     "url": "https://github.com/smohamadabedy/shaba/issues"
