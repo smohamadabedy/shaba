@@ -11,7 +11,7 @@ contribution: create pull/merge request on branch name shaba{weeknumber}{month}{
 
 <h3>📦 نصب</h3>
     <p><strong>CDN:</strong></p>
-    <pre dir="ltr"><code>&lt;script src="https://cdn.jsdelivr.net/gh/smohamadabedy/shaba@master/dist/shaba.min.js"&gt;&lt;/script&gt;</code></pre>
+    <pre dir="ltr"><code>&lt;script src="https://cdn.jsdelivr.net/gh/smohamadabedy/shaba@latest/dist/shaba.min.js"&gt;&lt;/script&gt;</code></pre>
 
   <p><strong>NPM:</strong></p>
   <pre dir="ltr"><code>npm install shaba</code></pre>
@@ -35,25 +35,25 @@ console.log(bank); // ["meli", "603799", "بانک ملی"]
     </ul>
 	<br/><br/>
     <h3>🖼 استفاده از لوگوهای بانکی</h3>
-    <pre dir="ltr"><code>&lt;img src="https://cdn.jsdelivr.net/gh/smohamadabedy/shaba@master/bank-iran/meli.png"&gt;</code></pre>
+    <pre dir="ltr"><code>&lt;img src="https://cdn.jsdelivr.net/gh/smohamadabedy/shaba@latest/bank-iran/meli.png"&gt;</code></pre>
 	<br/><br/>
 	<h3>🧪 نمونه کد</h3>
 <pre dir="ltr">
 <code dir="ltr">
 			
 	<!-- نمایش لوگوی بانک کارت -->
-	<img width="32px" id="cardBankLogo" src="https://cdn.jsdelivr.net/gh/smohamadabedy/shaba@master/bank-iran/no-img.png">
+	<img width="32px" id="cardBankLogo" src="https://cdn.jsdelivr.net/gh/smohamadabedy/shaba@latest/bank-iran/no-img.png"><span id="cardName"></span>
 	
 	<!-- ورودی شماره کارت (با جهت چپ به راست برای اعداد) -->
 	<input type="text" id="cardInput" class="creditcart-input" style="direction:ltr" placeholder="شماره کارت را وارد کنید">
 	
 	<!-- نمایش لوگوی بانک شبا -->
-	<img width="32px" id="shabaBankLogo" src="https://cdn.jsdelivr.net/gh/smohamadabedy/shaba@master/bank-iran/no-img.png">
+	<img width="32px" id="shabaBankLogo" src="https://cdn.jsdelivr.net/gh/smohamadabedy/shaba@latest/bank-iran/no-img.png"><span id="shabaName"></span>
 	
 	<!-- ورودی شماره شبا -->
 	<input type="text" id="shabaInput" class="shaba-input" style="direction:ltr" placeholder="کد شبا را وارد کنید">
 <!-- بارگذاری فایل جاوااسکریپت از CDN (jsDelivr) -->
-	<script src="https://cdn.jsdelivr.net/gh/smohamadabedy/shaba@master/dist/shaba.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/gh/smohamadabedy/shaba@latest/dist/shaba.min.js"></script>
 	
 	<script type="text/javascript">
 	  // گرفتن المان‌های ورودی از صفحه
@@ -69,8 +69,10 @@ console.log(bank); // ["meli", "603799", "بانک ملی"]
 	
 	    // تغییر تصویر لوگوی بانک
 	    document.getElementById('cardBankLogo').src =
-	      "https://cdn.jsdelivr.net/gh/smohamadabedy/shaba@master/bank-iran/" + bank[0] + ".png";
-	
+	      "https://cdn.jsdelivr.net/gh/smohamadabedy/shaba@latest/bank-iran/" + bank[0] + ".png";
+	    
+           document.getElementById('cardName').innerHTML =  bank[2];  //نمایش نام بانک
+
 	    // رنگ حاشیه را سبز یا قرمز نمایش بده بر اساس اعتبار کارت
 	    this.style.borderColor = isValid ? 'green' : 'red';
 	  });
@@ -85,8 +87,10 @@ console.log(bank); // ["meli", "603799", "بانک ملی"]
 	
 	    // تغییر تصویر لوگوی بانک
 	    document.getElementById('shabaBankLogo').src =
-	      "https://cdn.jsdelivr.net/gh/smohamadabedy/shaba@master/bank-iran/" + bank[0] + ".png";
-	
+	      "https://cdn.jsdelivr.net/gh/smohamadabedy/shaba@latest/bank-iran/" + bank[0] + ".png";
+
+       	    document.getElementById('shabaName').innerHTML =  bank[1]; //نمایش نام بانک
+
 	    // آماده‌سازی و اعتبارسنجی با استاندارد ISO 7064 (Mod97)
 	    const prepared = shaba.iso13616Prepare(input);
 	    const valid = shaba.iso7064Mod97_10(prepared) === 1;
