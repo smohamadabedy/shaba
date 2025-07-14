@@ -102,7 +102,7 @@
 	<br/><br/>
     <h3>📦 نصب</h3>
     <p><strong>CDN:</strong></p>
-    <pre dir="ltr"><code>&lt;script src="https://cdn.jsdelivr.net/gh/smohamadabedy/shaba@master/dist/shaba.min.js"&gt;&lt;/script&gt;</code></pre>
+    <pre dir="ltr"><code>&lt;script src="https://cdn.jsdelivr.net/gh/smohamadabedy/shaba@latest/dist/shaba.min.js"&gt;&lt;/script&gt;</code></pre>
 
     <p><strong>NPM:</strong></p>
     <pre dir="ltr"><code>npm install shaba</code></pre>
@@ -125,23 +125,23 @@ console.log(bank); // ["meli", "603799", "بانک ملی"]
     </ul>
 	<br/><br/>
     <h3>🖼 استفاده از لوگوهای بانکی</h3>
-    <pre dir="ltr"><code>&lt;img src="https://cdn.jsdelivr.net/gh/smohamadabedy/shaba@master/bank-iran/meli.png"&gt;</code></pre>
+    <pre dir="ltr"><code>&lt;img src="https://cdn.jsdelivr.net/gh/smohamadabedy/shaba@latest/bank-iran/meli ... .png"&gt;</code></pre>
 	<br/><br/>
 	<h3>🧪 نمونه کد</h3>
 <pre dir="ltr"><code dir="ltr">&lt;!-- نمایش لوگوی بانک کارت --&gt;
-&lt;img width=&quot;32px&quot; id=&quot;cardBankLogo&quot; src=&quot;https://cdn.jsdelivr.net/gh/smohamadabedy/shaba@master/bank-iran/no-img.png&quot;&gt;
+&lt;img width=&quot;32px&quot; id=&quot;cardBankLogo&quot; src=&quot;https://cdn.jsdelivr.net/gh/smohamadabedy/shaba@latest/bank-iran/no-img.png&quot;&gt;
 
 &lt;!-- ورودی شماره کارت (سمت چپ به راست برای اعداد) --&gt;
 &lt;input type=&quot;text&quot; id=&quot;cardInput&quot; class=&quot;creditcart-input&quot; style=&quot;direction:ltr&quot; placeholder=&quot;شماره کارت را وارد کنید&quot;&gt;
 
 &lt;!-- نمایش لوگوی بانک شبا --&gt;
-&lt;img width=&quot;32px&quot; id=&quot;shabaBankLogo&quot; src=&quot;https://cdn.jsdelivr.net/gh/smohamadabedy/shaba@master/bank-iran/no-img.png&quot;&gt;
+&lt;img width=&quot;32px&quot; id=&quot;shabaBankLogo&quot; src=&quot;https://cdn.jsdelivr.net/gh/smohamadabedy/shaba@latest/bank-iran/no-img.png&quot;&gt;
 
 &lt;!-- ورودی شماره شبا --&gt;
 &lt;input type=&quot;text&quot; id=&quot;shabaInput&quot; class=&quot;shaba-input&quot; style=&quot;direction:ltr&quot; placeholder=&quot;کد شبا را وارد کنید&quot;&gt;
 
 &lt;!-- بارگذاری فایل جاوااسکریپت از CDN jsDelivr --&gt;
-&lt;script src=&quot;https://cdn.jsdelivr.net/gh/smohamadabedy/shaba@master/dist/shaba.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;https://cdn.jsdelivr.net/gh/smohamadabedy/shaba@latest/dist/shaba.min.js&quot;&gt;&lt;/script&gt;
 
 &lt;script type=&quot;text/javascript&quot;&gt;
 
@@ -158,7 +158,7 @@ console.log(bank); // ["meli", "603799", "بانک ملی"]
 
     // نمایش لوگوی بانک
     document.getElementById('cardBankLogo').src =
-      &quot;https://cdn.jsdelivr.net/gh/smohamadabedy/shaba@master/bank-iran/&quot; + bank[0] + &quot;.png&quot;;
+      &quot;https://cdn.jsdelivr.net/gh/smohamadabedy/shaba@latest/bank-iran/&quot; + bank[0] + &quot;.png&quot;;
 
     // رنگ کادر را بر اساس اعتبار تنظیم کن
     this.style.borderColor = isValid ? 'green' : 'red';
@@ -172,7 +172,7 @@ console.log(bank); // ["meli", "603799", "بانک ملی"]
 
     // نمایش لوگوی بانک مربوط به شبا
     document.getElementById('shabaBankLogo').src =
-      &quot;https://cdn.jsdelivr.net/gh/smohamadabedy/shaba@master/bank-iran/&quot; + bank[0] + &quot;.png&quot;;
+      &quot;https://cdn.jsdelivr.net/gh/smohamadabedy/shaba@latest/bank-iran/&quot; + bank[0] + &quot;.png&quot;;
 
     // بررسی صحت شماره شبا (Mod97)
     const prepared = shaba.iso13616Prepare(input);
