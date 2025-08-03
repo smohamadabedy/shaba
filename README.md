@@ -137,7 +137,7 @@ console.log(bank); // ["meli", "603799", "بانک ملی"]
         <tr><td>21</td><td>بانک سینا</td><td>059</td><td><span class="regex">/\d{2}(059)\d+/g</span></td></tr>
         <tr><td>22</td><td>قرض الحسنه مهر</td><td>060</td><td><span class="regex">/\d{2}(060)\d+/g</span></td></tr>
         <tr><td>23</td><td>بانک شهر</td><td>061</td><td><span class="regex">/\d{2}(061)\d+/g</span></td></tr>
-        <tr><td>24</td><td>بانک تات</td><td>062</td><td><span class="regex">/\d{2}(062)\d+/g</span></td></tr>
+        <tr><td>24</td><td>بانک آینده</td><td>062</td><td><span class="regex">/\d{2}(062)\d+/g</span></td></tr>
         <tr><td>25</td><td>بانک انصار</td><td>063</td><td><span class="regex">/\d{2}(063)\d+/g</span></td></tr>
         <tr><td>26</td><td>بانک گردشگری</td><td>064</td><td><span class="regex">/\d{2}(064)\d+/g</span></td></tr>
         <tr><td>27</td><td>بانک حکمت ایرانیان</td><td>065</td><td><span class="regex">/\d{2}(065)\d+/g</span></td></tr>
@@ -165,6 +165,7 @@ console.log(bank); // ["meli", "603799", "بانک ملی"]
         <tr><td>بانک سرمایه</td><td>۶۳۹۶۰۷</td><td><span class="regex">/(639607)\d+/g</span></td></tr>
         <tr><td>بانک صنعت و معدن</td><td>۶۲۷۹۶۱</td><td><span class="regex">/(627961)\d+/g</span></td></tr>
         <tr><td>بانک شهر</td><td>۵۰۴۷۰۶</td><td><span class="regex">/(504706)\d+/g</span></td></tr>
+        <tr><td>بانک آینده</td><td>۶۳۶۲۱۴</td><td><span class="regex">/(636214)\d+/g</span></td></tr>
         <tr><td>بانک کشاورزی</td><td>۶۰۳۷۷۰</td><td><span class="regex">/(603770)\d+/g</span></td></tr>
         <tr><td>بانک دی</td><td>۵۰۲۹۳۸</td><td><span class="regex">/(502938)\d+/g</span></td></tr>
         <tr><td>بانک مسکن</td><td>۶۲۸۰۲۳</td><td><span class="regex">/(628023)\d+/g</span></td></tr>
